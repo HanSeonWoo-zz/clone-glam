@@ -22,8 +22,8 @@ export enum Colors {
   Gray2 = '#CCCCCC',
   Gray4 = '#7F7F7F',
   DarkGray1 = '#595959',
-  Dim06 = 'rgba(0,0,0,0.6)',
-  Dim04 = 'rgba(0,0,0,0.4)',
+  Trans = 'transparent',
+  White = '#FFFFFF',
 }
 
 export const globalStyles = StyleSheet.create({

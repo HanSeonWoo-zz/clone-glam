@@ -14,6 +14,7 @@ const TabNavigator = (props): React.ReactElement => {
   return (
     <>
       <BottomTab.Navigator
+        sceneContainerStyle={{backgroundColor: Colors.White}}
         screenListeners={({navigation}) => ({
           tabLongPress: e => {
             if (__DEV__) {
@@ -24,6 +25,7 @@ const TabNavigator = (props): React.ReactElement => {
         screenOptions={{
           tabBarShowLabel: false,
           tabBarActiveTintColor: Colors.Black,
+          headerShown: false,
         }}>
         <BottomTab.Screen
           name={'Home'}
