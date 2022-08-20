@@ -1,3 +1,4 @@
+import {useNavigation} from '@react-navigation/native';
 import React, {useCallback} from 'react';
 import {View, TouchableOpacity, Text, Alert} from 'react-native';
 import FastImage from 'react-native-fast-image';
@@ -23,6 +24,7 @@ export const renderTabBar = (
     }>;
   },
 ) => {
+  const navigation = useNavigation();
   return (
     <View
       style={{
@@ -46,7 +48,7 @@ export const renderTabBar = (
         inactiveColor={Colors.Gray2}
         tabStyle={{width: 'auto'}}
       />
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.navigate('ProfileEdit')}>
         <FastImage
           style={{width: 30, height: 30}}
           source={Img.icon.main.setting}
@@ -213,12 +215,11 @@ export const CustomRecommendLine = ({
 };
 
 export const CardComponent = (props: {
-  item: Card & {type: string};
+  item: Card & {type?: string};
   onClose: () => void;
   onLike: () => void;
-  isToday?: boolean;
 }) => {
-  const {item, onClose, onLike, isToday} = props;
+  const {item, onClose, onLike} = props;
   return (
     <View
       style={{

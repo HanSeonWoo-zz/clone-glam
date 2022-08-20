@@ -15,7 +15,9 @@ import {Card} from '../components/types';
 
 function HomeGlam() {
   const flatListRef = useRef();
-  const [todayRecommendations, setTodayRecommendations] = useState([]);
+  const [todayRecommendations, setTodayRecommendations] = useState<[] | null>(
+    null,
+  );
   const [additionalRecommendations, setAdditionalRecommendations] = useState(
     [],
   );
@@ -28,7 +30,7 @@ function HomeGlam() {
   const initialFetch = async () => {
     const resIntro = await getIntroduction();
     setTodayRecommendations(
-      resIntro.data.map(i => ({...i, type: '오늘의 추천'})),
+      resIntro?.data?.map(i => ({...i, type: '오늘의 추천'})) || [],
     );
     const resAdditional = await getIntroductionAdditional();
     setAdditionalRecommendations(resAdditional.data);
@@ -78,10 +80,6 @@ function HomeGlam() {
   );
 
   const onCustomRecommend = async (title: string) => {
-    console.log(
-      '🚀 ~ file: HomeGlam.tsx ~ line 91 ~ onCustomRecommend ~ title',
-      title,
-    );
     const res = await postIntroductionCustom();
     const temp = [
       ...res.data.map(i => ({...i, type: title})),
@@ -101,15 +99,15 @@ function HomeGlam() {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
   };
   const ListHeaderComponent = () => {
+    if (todayRecommendations === null) return <></>;
     return (
       <>
-        {todayRecommendations.map((item: Card) => (
+        {todayRecommendations?.map((item: Card) => (
           <View key={String(item.id)}>
             <ItemSeparatorComponent />
             <CardComponent
               onClose={() => onTempTodayFunction(item.id)}
               onLike={() => onTempTodayFunction(item.id)}
-              isToday
               item={item}
             />
           </View>
