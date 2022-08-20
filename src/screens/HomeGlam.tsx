@@ -8,7 +8,7 @@ import { CardComponent, CustomRecommend } from './homeComponents';
 
 const HomeGlam = () => {
   const [todayRecommendations, setTodayRecommendations] = useState<Card[] | null>(null);
-  const [additionalRecommendations, setAdditionalRecommendations] = useState<Card[] | null>([]);
+  const [additionalRecommendations, setAdditionalRecommendations] = useState<Card[] | null>(null);
   const [nextUrl, setNextUrl] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const flatListRef = useRef();
@@ -20,7 +20,7 @@ const HomeGlam = () => {
     const resIntro = await getIntroduction();
     setTodayRecommendations(resIntro?.data?.map((i) => ({ ...i, type: '오늘의 추천' })) || []);
     const resAdditional = await getIntroductionAdditional();
-    setAdditionalRecommendations(resAdditional.data);
+    setAdditionalRecommendations(resAdditional.data || []);
     setNextUrl(resAdditional?.meta?.next?.url || '');
   };
 
@@ -66,7 +66,6 @@ const HomeGlam = () => {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
   };
   const ListHeaderComponent = () => {
-    if (todayRecommendations === null) return <></>;
     return (
       <>
         {todayRecommendations?.map((item: Card) => (
@@ -86,6 +85,10 @@ const HomeGlam = () => {
   const ListFooterComponent = () => {
     return <ActivityIndicator size={24} style={{ margin: 20 }} color={'#999'} />;
   };
+
+  if (todayRecommendations === null || additionalRecommendations === null) {
+    return <></>;
+  }
 
   return (
     <FlatList

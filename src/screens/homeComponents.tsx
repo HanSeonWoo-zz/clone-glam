@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
-import React from 'react';
+import React, { useState } from 'react';
 import { View, TouchableOpacity, Text, Alert } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import LinearGradient from 'react-native-linear-gradient';
@@ -71,6 +71,19 @@ export const renderTabBar = (
 
 export const CardComponent = (props: { item: Card & { type?: string }; onClose: () => void; onLike: () => void }) => {
   const { item, onClose, onLike } = props;
+  const [pictureIndex, setPictureIndex] = useState(0);
+
+  const onLeft = () => {
+    const temp = Math.max(pictureIndex - 1, 0);
+    setPictureIndex(temp);
+  };
+  const onRight = () => {
+    const temp = Math.min(pictureIndex + 1, item.pictures?.length - 1);
+    setPictureIndex(temp);
+  };
+  const renderGuide = (item, index) => {
+    return <View style={{ flex: 1, height: 3, backgroundColor: pictureIndex === index ? Colors.White : 'rgba(255,255,255,0.5)', borderRadius: 4, marginHorizontal: 2 }} />;
+  };
   return (
     <View
       style={{
@@ -88,8 +101,11 @@ export const CardComponent = (props: { item: Card & { type?: string }; onClose: 
             borderTopLeftRadius: 12,
             borderTopRightRadius: 12,
           }}
-          source={{ uri: BASE_URL + item.pictures[0] }}
+          source={{ uri: BASE_URL + item.pictures[pictureIndex] }}
         />
+        <TouchableOpacity onPress={onLeft} activeOpacity={1} style={{ width: '50%', height: '100%', position: 'absolute', top: 0, left: 0 }} />
+        <TouchableOpacity onPress={onRight} activeOpacity={1} style={{ width: '50%', height: '100%', position: 'absolute', top: 0, right: 0 }} />
+        <View style={{ flexDirection: 'row', alignSelf: 'center', flex: 1, paddingTop: 8, width: SCREEN_WIDTH / 3 }}>{item.pictures.map(renderGuide)}</View>
         <LinearGradient start={{ x: 0, y: 1 }} end={{ x: 0, y: 0 }} locations={[0, 1]} colors={['rgba(51,51,51,1)', 'rgba(51,51,51,0)']}>
           <View style={{ paddingHorizontal: 16 }}>
             {item.type && (
