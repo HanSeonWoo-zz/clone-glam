@@ -26,23 +26,27 @@ function ProfileEditScreen(props) {
     setMeta(res.meta);
   };
 
-  const renderImage = useCallback((item: number) => {
-    return (
-      <FastImage
-        key={String(item)}
-        style={{
-          width: SCREEN_WIDTH / 3 - 2,
-          height: SCREEN_WIDTH / 3 - 2,
-          marginBottom: 4,
-        }}
-        source={profile?.pictures[item] ? { uri: BASE_URL + profile?.pictures[item] } : Img.image.person}
-      />
-    );
-  }, []);
+  const renderImage = useCallback(
+    (item: number) => {
+      return (
+        <FastImage
+          key={String(item)}
+          style={{
+            width: SCREEN_WIDTH / 3 - 2,
+            height: SCREEN_WIDTH / 3 - 2,
+            marginBottom: 4,
+          }}
+          source={profile?.pictures[item] ? { uri: BASE_URL + profile?.pictures[item] } : Img.image.person}
+        />
+      );
+    },
+    [profile],
+  );
 
   if (!profile) {
     return <ActivityIndicator />;
   }
+
   return (
     <>
       <ScrollView scrollIndicatorInsets={{ right: 1 }} contentContainerStyle={{ paddingBottom: insets.bottom }}>
@@ -135,12 +139,17 @@ function ProfileEditScreen(props) {
         <ProfileInfo
           title="직장"
           content={profile.company}
-          editable
           onChangeText={(text) => {
             setProfile({ ...profile, company: text });
           }}
         />
-        <ProfileInfo title="직업" content={profile.job} editable />
+        <ProfileInfo
+          title="직업"
+          content={profile.job}
+          onChangeText={(text) => {
+            setProfile({ ...profile, job: text });
+          }}
+        />
         <ProfileInfo
           title="학력"
           content={meta?.educations?.find((edu) => edu.key === profile.education)?.name}
@@ -152,7 +161,6 @@ function ProfileEditScreen(props) {
         <ProfileInfo
           title="학교"
           content={profile.school}
-          editable
           onChangeText={(text) => {
             setProfile({ ...profile, school: text });
           }}

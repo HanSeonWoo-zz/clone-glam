@@ -1,32 +1,15 @@
 import React from 'react';
-import {TouchableOpacity, Text, View, FlatList, TextInput} from 'react-native';
-import {Colors} from '../components/styles';
-import {KeyName} from '../components/types';
+import { TouchableOpacity, Text, View, FlatList, TextInput } from 'react-native';
+import { Colors } from '../components/styles';
+import { KeyName } from '../components/types';
 import Modal from 'react-native-modal';
 import FastImage from 'react-native-fast-image';
-import {Img} from '../assets/images';
+import { Img } from '../assets/images';
 
-export const ProfileInfo = (props: {
-  title: string;
-  content: string | number | undefined;
-  onPress?: () => void;
-  placeholder?: string;
-  onChangeText?: (text: string) => void;
-  editable?: boolean;
-}) => {
-  const {
-    title,
-    content,
-    onPress,
-    placeholder = '입력해주세요',
-    onChangeText,
-    editable = false,
-  } = props;
+export const ProfileInfo = (props: { title: string; content: string | number | undefined; onPress?: () => void; placeholder?: string; onChangeText?: (text: string) => void }) => {
+  const { title, content, onPress, placeholder = '입력해주세요', onChangeText } = props;
   return (
-    <TouchableOpacity
-      disabled={!onPress}
-      onPress={() => onPress && onPress()}
-      style={{flexDirection: 'row', alignItems: 'center', height: 44}}>
+    <TouchableOpacity disabled={!onPress} onPress={() => onPress && onPress()} style={{ flexDirection: 'row', alignItems: 'center', height: 44 }}>
       <Text
         style={{
           width: '35%',
@@ -43,18 +26,17 @@ export const ProfileInfo = (props: {
           width: '65%',
           paddingRight: 16,
         }}>
-        {placeholder === '입력해주세요' ? (
+        {onChangeText ? (
           <TextInput
-            editable={editable}
             autoCorrect={false}
             placeholder={placeholder}
             onChangeText={onChangeText}
             value={String(content || '')}
             style={{
-              flex: editable ? 1 : undefined,
+              flex: 1,
               paddingLeft: 16,
               fontSize: !content ? 14 : 16,
-              color: onPress || editable ? Colors.GlamBlue : Colors.Black,
+              color: Colors.GlamBlue,
             }}
             clearButtonMode={'while-editing'}
           />
@@ -63,23 +45,13 @@ export const ProfileInfo = (props: {
             style={{
               paddingLeft: 16,
               fontSize: !content ? 14 : 16,
-              color: !content
-                ? Colors.Gray2
-                : onPress
-                ? Colors.GlamBlue
-                : Colors.Black,
+              color: !content ? Colors.Gray2 : onPress ? Colors.GlamBlue : Colors.Black,
             }}>
             {content || placeholder}
             {title === '키' && 'cm'}
           </Text>
         )}
-
-        {title === '닉네임' && (
-          <FastImage
-            style={{width: 16, height: 16, marginLeft: 4}}
-            source={Img.icon.profile_edit.lock}
-          />
-        )}
+        {title === '닉네임' && <FastImage style={{ width: 16, height: 16, marginLeft: 4 }} source={Img.icon.profile_edit.lock} />}
       </View>
     </TouchableOpacity>
   );
@@ -98,7 +70,7 @@ export const ModalEducation = ({
   onPress: (type: string) => void;
   onClose: () => void;
 }) => {
-  const renderItem = ({item, index}: {item: KeyName; index: number}) => {
+  const renderItem = ({ item, index }: { item: KeyName; index: number }) => {
     return (
       <TouchableOpacity
         onPress={() => {
@@ -106,20 +78,13 @@ export const ModalEducation = ({
           onClose();
         }}
         key={String(item.key)}
-        style={{height: 44, paddingHorizontal: 16, justifyContent: 'center'}}>
-        <Text
-          style={{color: education === item.key ? Colors.GlamBlue : undefined}}>
-          {item.name}
-        </Text>
+        style={{ height: 44, paddingHorizontal: 16, justifyContent: 'center' }}>
+        <Text style={{ color: education === item.key ? Colors.GlamBlue : undefined }}>{item.name}</Text>
       </TouchableOpacity>
     );
   };
   return (
-    <Modal
-      onBackdropPress={onClose}
-      isVisible={isVisible}
-      backdropOpacity={0.4}
-      style={{marginHorizontal: 50}}>
+    <Modal onBackdropPress={onClose} isVisible={isVisible} backdropOpacity={0.4} style={{ marginHorizontal: 50 }}>
       <View
         style={{
           backgroundColor: Colors.White,
@@ -134,14 +99,12 @@ export const ModalEducation = ({
             borderBottomWidth: 1,
             borderColor: '#eee',
           }}>
-          <Text style={{fontSize: 16, fontWeight: '600', color: Colors.Black}}>
-            학력
-          </Text>
+          <Text style={{ fontSize: 16, fontWeight: '600', color: Colors.Black }}>학력</Text>
         </View>
         <FlatList
           data={educations}
           renderItem={renderItem}
-          contentContainerStyle={{flexGrow: 1}}
+          contentContainerStyle={{ flexGrow: 1 }}
           getItemLayout={(data, index) => ({
             length: 44,
             offset: 44 * index,
@@ -166,7 +129,7 @@ export const ModalBodyType = ({
   onPress: (type: string) => void;
   onClose: () => void;
 }) => {
-  const renderItem = ({item, index}: {item: KeyName; index: number}) => {
+  const renderItem = ({ item, index }: { item: KeyName; index: number }) => {
     return (
       <TouchableOpacity
         onPress={() => {
@@ -174,20 +137,13 @@ export const ModalBodyType = ({
           onClose();
         }}
         key={String(item.key)}
-        style={{height: 44, paddingHorizontal: 16, justifyContent: 'center'}}>
-        <Text
-          style={{color: body_type === item.key ? Colors.GlamBlue : undefined}}>
-          {item.name}
-        </Text>
+        style={{ height: 44, paddingHorizontal: 16, justifyContent: 'center' }}>
+        <Text style={{ color: body_type === item.key ? Colors.GlamBlue : undefined }}>{item.name}</Text>
       </TouchableOpacity>
     );
   };
   return (
-    <Modal
-      onBackdropPress={onClose}
-      isVisible={isVisible}
-      backdropOpacity={0.4}
-      style={{marginHorizontal: 50}}>
+    <Modal onBackdropPress={onClose} isVisible={isVisible} backdropOpacity={0.4} style={{ marginHorizontal: 50 }}>
       <View
         style={{
           backgroundColor: Colors.White,
@@ -202,14 +158,12 @@ export const ModalBodyType = ({
             borderBottomWidth: 1,
             borderColor: '#eee',
           }}>
-          <Text style={{fontSize: 16, fontWeight: '600', color: Colors.Black}}>
-            체형
-          </Text>
+          <Text style={{ fontSize: 16, fontWeight: '600', color: Colors.Black }}>체형</Text>
         </View>
         <FlatList
           data={body_types}
           renderItem={renderItem}
-          contentContainerStyle={{flexGrow: 1}}
+          contentContainerStyle={{ flexGrow: 1 }}
           getItemLayout={(data, index) => ({
             length: 44,
             offset: 44 * index,
@@ -229,23 +183,15 @@ export const ModalHeight = ({
   onClose,
 }: {
   isVisible: boolean;
-  height_range: {max: number; min: number} | undefined;
+  height_range: { max: number; min: number } | undefined;
   height: number;
   onPress: (num: number) => void;
   onClose: () => void;
 }) => {
   if (!height_range) return <></>;
-  const heightArr = Array.from(
-    {length: height_range?.max - height_range?.min + 1},
-    (v, i) => height_range.min + i,
-  );
-  const renderItem = ({item, index}: {item: number; index: number}) => {
-    const suffix =
-      item === heightArr[0]
-        ? '이하'
-        : item === heightArr[heightArr.length - 1]
-        ? '이상'
-        : '';
+  const heightArr = Array.from({ length: height_range?.max - height_range?.min + 1 }, (v, i) => height_range.min + i);
+  const renderItem = ({ item, index }: { item: number; index: number }) => {
+    const suffix = item === heightArr[0] ? '이하' : item === heightArr[heightArr.length - 1] ? '이상' : '';
     return (
       <TouchableOpacity
         onPress={() => {
@@ -253,19 +199,15 @@ export const ModalHeight = ({
           onClose();
         }}
         key={String(item)}
-        style={{height: 44, paddingHorizontal: 16, justifyContent: 'center'}}>
-        <Text style={{color: height === item ? Colors.GlamBlue : undefined}}>
+        style={{ height: 44, paddingHorizontal: 16, justifyContent: 'center' }}>
+        <Text style={{ color: height === item ? Colors.GlamBlue : undefined }}>
           {item}cm {suffix}
         </Text>
       </TouchableOpacity>
     );
   };
   return (
-    <Modal
-      onBackdropPress={onClose}
-      isVisible={isVisible}
-      backdropOpacity={0.4}
-      style={{marginHorizontal: 50}}>
+    <Modal onBackdropPress={onClose} isVisible={isVisible} backdropOpacity={0.4} style={{ marginHorizontal: 50 }}>
       <View
         style={{
           backgroundColor: Colors.White,
@@ -280,14 +222,12 @@ export const ModalHeight = ({
             borderBottomWidth: 1,
             borderColor: '#eee',
           }}>
-          <Text style={{fontSize: 16, fontWeight: '600', color: Colors.Black}}>
-            키
-          </Text>
+          <Text style={{ fontSize: 16, fontWeight: '600', color: Colors.Black }}>키</Text>
         </View>
         <FlatList
           data={heightArr}
           renderItem={renderItem}
-          initialScrollIndex={heightArr.findIndex(i => i === height)}
+          initialScrollIndex={heightArr.findIndex((i) => i === height)}
           getItemLayout={(data, index) => ({
             length: 44,
             offset: 44 * index,
