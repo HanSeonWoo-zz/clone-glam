@@ -83,7 +83,7 @@ Home탭에 Glam - 근처 - 라이브 부분을 구현하기 위해 사용
 
 카드 구현 시, 배경에 Gradient를 넣기 위해 사용.
 
-<center><img src = "https://user-images.githubusercontent.com/67218739/185757251-7369ddf6-86d5-4f3f-94ce-0852e9179bff.png" width="50%"></center>
+<p align="center"><img src = "https://user-images.githubusercontent.com/67218739/185757251-7369ddf6-86d5-4f3f-94ce-0852e9179bff.png" width="50%"></p>
 
 <br/>
 
@@ -91,7 +91,7 @@ Home탭에 Glam - 근처 - 라이브 부분을 구현하기 위해 사용
 
 프로필 설정 시, [키, 체형, 학력] 부분의 선택창을 Modal을 통해 구현.
 
-<center><img src = "https://user-images.githubusercontent.com/67218739/185757358-04f666e2-13bd-46a8-a33a-8d6d192088ec.png" width="50%"></center>
+<p align="center"><img src = "https://user-images.githubusercontent.com/67218739/185757358-04f666e2-13bd-46a8-a33a-8d6d192088ec.png" width="50%"></p>
 
 <br/>
 
