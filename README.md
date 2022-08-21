@@ -71,19 +71,21 @@ yarn ios
 
 Home탭에 Glam - 근처 - 라이브 부분을 구현하기 위해 사용
 
-- 화면 슬라이딩 하거나 상단탭을 클릭하여 화면을 이동할 수 있다.
+- 화면을 슬라이딩 하거나 상단탭을 클릭하여 화면을 이동할 수 있습니다.
 
 <p align="center"><img src = "https://user-images.githubusercontent.com/67218739/185756494-be09e53a-0799-4d9a-861e-040fea500fb2.gif" width="30%"></p>
 
 ## react-native-fast-image
 
-이미지 캐싱을 지원한다.
+이미지 캐싱을 지원해서 한 번 렌더링된 이미지는 빠르게 볼 수 있습니다.
 
 ## react-native-linear-gradient
 
-카드 구현 시, 배경에 Gradient를 넣기 위해 사용.
+카드 구현 시, 글씨 배경에 Gradient를 넣기 위해 사용.
 
-<p align="center"><img src = "https://user-images.githubusercontent.com/67218739/185757251-7369ddf6-86d5-4f3f-94ce-0852e9179bff.png" width="50%"></p>
+<p align="center"><img style="margin-right:30px" src = "https://user-images.githubusercontent.com/67218739/185757251-7369ddf6-86d5-4f3f-94ce-0852e9179bff.png" width="50%"><img src = "https://user-images.githubusercontent.com/67218739/185780784-cbc6ec55-5558-4a7a-a46a-276d5e2f34ba.png" width="40%"></p>
+
+- 카드 앞에 보이지 않는 레이어를 클릭할 때, 사진을 넘길 수 있는 기능이 구현되어 있습니다.
 
 <br/>
 
@@ -92,6 +94,8 @@ Home탭에 Glam - 근처 - 라이브 부분을 구현하기 위해 사용
 프로필 설정 시, [키, 체형, 학력] 부분의 선택창을 Modal을 통해 구현.
 
 <p align="center"><img src = "https://user-images.githubusercontent.com/67218739/185757358-04f666e2-13bd-46a8-a33a-8d6d192088ec.png" width="50%"></p>
+
+- Modal은 하나의 컴포넌트를 재사용해서 사용합니다.
 
 <br/>
 
