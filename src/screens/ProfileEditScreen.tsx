@@ -7,20 +7,41 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { BASE_URL, getProfile } from '../api/api';
 import { Img } from '../assets/images';
 import { Colors, SCREEN_WIDTH } from '../components/styles';
-import { Meta, Profile } from '../components/types';
-import { ModalBodyType, ModalEducation, ModalHeight, ProfileInfo } from './profileEditComponents';
+import { KeyName, Meta, Profile } from '../components/types';
+import { ModalEdit, ProfileInfo } from './profileEditComponents';
+interface CurrentModal {
+  title: string;
+  values: KeyName[];
+  value: string | number;
+  profileKey: string;
+}
 
 function ProfileEditScreen(props) {
   const insets = useSafeAreaInsets();
   const [profile, setProfile] = useState<Profile>();
   const [meta, setMeta] = useState<Meta>();
-  const [isVisibleHeight, setIsVisibleHeight] = useState(false);
-  const [isVisibleBodyType, setIsVisibleBodyType] = useState(false);
-  const [isVisibleEducation, setIsVisibleEducation] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const [currentModal, setCurrentModal] = useState<CurrentModal | null>(null);
+  const [heightKeyName, setHeightKeyName] = useState<KeyName[] | null>(null);
 
   useEffect(() => {
     initialFetch();
   }, []);
+
+  useEffect(() => {
+    if (meta?.height_range) {
+      // 키 관련 메타 정보 max,min를 토대로 key, name 배열로 변경
+      const heightArr: KeyName[] = Array.from({ length: meta?.height_range?.max - meta?.height_range?.min + 1 }, (v, i) => {
+        const height = meta?.height_range.min + i;
+        const suffix = height === meta?.height_range.min ? ' 이하' : height === meta?.height_range.max ? ' 이상' : '';
+        return {
+          key: height,
+          name: height + 'cm' + suffix,
+        };
+      });
+      setHeightKeyName(heightArr);
+    }
+  }, [meta]);
 
   const initialFetch = async () => {
     const res = await getProfile();
@@ -124,16 +145,20 @@ function ProfileEditScreen(props) {
         <ProfileInfo
           title="키"
           content={profile.height}
-          onPress={() => {
-            setIsVisibleHeight(true);
+          metaData={heightKeyName}
+          onPress={(obj) => {
+            setIsVisible(true);
+            setCurrentModal({ ...obj, profileKey: 'height' });
           }}
           placeholder={'선택해주세요'}
         />
         <ProfileInfo
           title="체형"
-          content={meta?.body_types?.find((type) => type.key === profile.body_type)?.name}
-          onPress={() => {
-            setIsVisibleBodyType(true);
+          content={profile.body_type}
+          metaData={meta?.body_types}
+          onPress={(obj) => {
+            setIsVisible(true);
+            setCurrentModal({ ...obj, profileKey: 'body_type' });
           }}
           placeholder={'선택해주세요'}
         />
@@ -154,9 +179,11 @@ function ProfileEditScreen(props) {
         />
         <ProfileInfo
           title="학력"
-          content={meta?.educations?.find((edu) => edu.key === profile.education)?.name}
-          onPress={() => {
-            setIsVisibleEducation(true);
+          content={profile.education}
+          metaData={meta?.educations}
+          onPress={(obj) => {
+            setIsVisible(true);
+            setCurrentModal({ ...obj, profileKey: 'education' });
           }}
           placeholder={'선택해주세요'}
         />
@@ -169,33 +196,20 @@ function ProfileEditScreen(props) {
         />
       </KeyboardAwareScrollView>
 
-      <ModalEducation
-        isVisible={isVisibleEducation}
-        educations={meta?.educations}
-        education={profile.education}
-        onPress={(edu) => {
-          setProfile({ ...profile, education: edu });
-        }}
-        onClose={() => setIsVisibleEducation(false)}
-      />
-      <ModalBodyType
-        isVisible={isVisibleBodyType}
-        body_types={meta?.body_types}
-        body_type={profile.body_type}
-        onPress={(type) => {
-          setProfile({ ...profile, body_type: type });
-        }}
-        onClose={() => setIsVisibleBodyType(false)}
-      />
-      <ModalHeight
-        isVisible={isVisibleHeight}
-        height_range={meta?.height_range}
-        height={profile.height}
-        onPress={(num) => {
-          setProfile({ ...profile, height: num });
-        }}
-        onClose={() => setIsVisibleHeight(false)}
-      />
+      {!!currentModal && (
+        <ModalEdit
+          isVisible={isVisible}
+          title={currentModal?.title}
+          values={currentModal?.values}
+          value={currentModal?.value}
+          onPress={(text) => {
+            const temp = { ...profile };
+            temp[currentModal?.profileKey] = text;
+            setProfile(temp);
+          }}
+          onClose={() => setIsVisible(false)}
+        />
+      )}
     </>
   );
 }

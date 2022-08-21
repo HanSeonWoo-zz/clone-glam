@@ -29,9 +29,9 @@ export interface Meta {
   body_types: KeyName[];
   educations: KeyName[];
   genders: KeyName[];
-  height_range: {max: number; min: number};
+  height_range: { max: number; min: number };
 }
 export interface KeyName {
-  key: string;
+  key: string | number;
   name: string;
 }
