@@ -92,14 +92,7 @@ function ProfileEditScreen(props) {
           }}>
           <Text style={{ fontSize: 12, color: Colors.Gray4, marginRight: 4 }}>다양한 매력을 보여줄 수 있는 사진을 올려주세요</Text>
           <TouchableOpacity>
-            <Text
-              style={{
-                fontSize: 12,
-                fontWeight: '600',
-                color: Colors.DarkGray1,
-              }}>
-              더 알아보기
-            </Text>
+            <Text style={{ fontSize: 12, fontWeight: '600', color: Colors.DarkGray1 }}>더 알아보기</Text>
           </TouchableOpacity>
         </View>
 
@@ -111,14 +104,7 @@ function ProfileEditScreen(props) {
         </View>
         <View style={{ borderTopWidth: 1, borderColor: '#eee', marginVertical: 8 }} />
         <TouchableOpacity style={{ paddingHorizontal: 16 }} onPress={() => {}}>
-          <Text
-            style={{
-              fontSize: 16,
-              color: Colors.Black,
-              lineHeight: 35,
-            }}>
-            소개
-          </Text>
+          <Text style={{ fontSize: 16, color: Colors.Black, lineHeight: 35 }}>소개</Text>
           <TextInput
             multiline
             autoCorrect={false}
@@ -127,19 +113,9 @@ function ProfileEditScreen(props) {
               setProfile({ ...profile, introduction: text });
             }}
             value={String(profile.introduction || '')}
-            style={{
-              fontSize: 14,
-              color: profile.introduction ? Colors.GlamBlue : Colors.Black,
-            }}
+            style={{ fontSize: 14, color: Colors.GlamBlue }}
           />
-          <Text
-            style={{
-              fontSize: 12,
-              color: Colors.Gray4,
-              lineHeight: 30,
-            }}>
-            SNS 아이디 등 연락처 입력 시 서비스 이용 제한됩니다.
-          </Text>
+          <Text style={{ fontSize: 12, color: Colors.Gray4, lineHeight: 30 }}>SNS 아이디 등 연락처 입력 시 서비스 이용 제한됩니다.</Text>
         </TouchableOpacity>
         <View style={{ borderTopWidth: 1, borderColor: '#eee', marginVertical: 8 }} />
         <ProfileInfo
