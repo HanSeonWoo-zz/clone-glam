@@ -82,7 +82,12 @@ export const CardComponent = (props: { item: Card & { type?: string }; onClose: 
     setPictureIndex(temp);
   };
   const renderGuide = (item, index) => {
-    return <View style={{ flex: 1, height: 3, backgroundColor: pictureIndex === index ? Colors.White : 'rgba(255,255,255,0.5)', borderRadius: 4, marginHorizontal: 2 }} />;
+    return (
+      <View
+        key={String(item)}
+        style={{ flex: 1, height: 3, backgroundColor: pictureIndex === index ? Colors.White : 'rgba(255,255,255,0.5)', borderRadius: 4, marginHorizontal: 2 }}
+      />
+    );
   };
   return (
     <View

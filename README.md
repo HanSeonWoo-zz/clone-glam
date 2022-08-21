@@ -73,7 +73,7 @@ Home탭에 Glam - 근처 - 라이브 부분을 구현하기 위해 사용
 
 - 화면 슬라이딩 하거나 상단탭을 클릭하여 화면을 이동할 수 있다.
 
-<center><img src = "https://user-images.githubusercontent.com/67218739/185756494-be09e53a-0799-4d9a-861e-040fea500fb2.gif" width="50%" height="50%"></center>
+<center><img src = "https://user-images.githubusercontent.com/67218739/185756494-be09e53a-0799-4d9a-861e-040fea500fb2.gif" width="30%"></center>
 
 ## react-native-fast-image
 
@@ -83,13 +83,27 @@ Home탭에 Glam - 근처 - 라이브 부분을 구현하기 위해 사용
 
 카드 구현 시, 배경에 Gradient를 넣기 위해 사용.
 
-<center><img src = "https://user-images.githubusercontent.com/67218739/185757251-7369ddf6-86d5-4f3f-94ce-0852e9179bff.png" width="50%" height="50%"></center>
+<center><img src = "https://user-images.githubusercontent.com/67218739/185757251-7369ddf6-86d5-4f3f-94ce-0852e9179bff.png" width="50%"></center>
+
+<br/>
 
 ## react-native-modal
 
 프로필 설정 시, [키, 체형, 학력] 부분의 선택창을 Modal을 통해 구현.
 
-<center><img src = "https://user-images.githubusercontent.com/67218739/185757358-04f666e2-13bd-46a8-a33a-8d6d192088ec.png" width="50%" height="50%"></center>
+<center><img src = "https://user-images.githubusercontent.com/67218739/185757358-04f666e2-13bd-46a8-a33a-8d6d192088ec.png" width="50%"></center>
+
+<br/>
+
+## react-native-keyboard-aware-scroll-view
+
+프로필 수정 시 키보드가 화면을 가리는 문제를 해결
+
+<center><img src = "https://user-images.githubusercontent.com/67218739/185774677-66daadac-e006-4417-a20d-90d82d319c21.gif" width="30%" >
+적용 전
+<img src = "https://user-images.githubusercontent.com/67218739/185774795-cdfa8a8f-db23-4c90-85bf-af8e371235bc.gif" width="30%" style="margin-left:80px">적용 후</center>
+
+<br/>
 
 ## axios
 

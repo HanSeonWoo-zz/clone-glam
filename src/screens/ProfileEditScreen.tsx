@@ -1,7 +1,9 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { ActivityIndicator, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import FastImage from 'react-native-fast-image';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
 import { BASE_URL, getProfile } from '../api/api';
 import { Img } from '../assets/images';
 import { Colors, SCREEN_WIDTH } from '../components/styles';
@@ -49,7 +51,7 @@ function ProfileEditScreen(props) {
 
   return (
     <>
-      <ScrollView scrollIndicatorInsets={{ right: 1 }} contentContainerStyle={{ paddingBottom: insets.bottom }}>
+      <KeyboardAwareScrollView scrollIndicatorInsets={{ right: 1 }} contentContainerStyle={{ paddingBottom: insets.bottom }}>
         <View
           style={{
             flexDirection: 'row',
@@ -165,7 +167,7 @@ function ProfileEditScreen(props) {
             setProfile({ ...profile, school: text });
           }}
         />
-      </ScrollView>
+      </KeyboardAwareScrollView>
 
       <ModalEducation
         isVisible={isVisibleEducation}
